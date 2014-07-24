@@ -9,7 +9,11 @@ module.exports = (grunt) ->
       array.src.forEach (file) ->
         if grunt.file.exists(file) and grunt.file.exists(array.dest)
           grunt.log.ok "injecting "+file+ " in "+ array.dest
-          data = options.reader file
+          raw = grunt.file.read file
+          try
+            data = options.parser raw
+          catch e
+            grunt.fail.warn("\n\nparsing failed\n"+e+"\n\n")
           if options.path
             data = lib.extractor(data,options.path,options.keepStructure)
           content = grunt.file.read array.dest

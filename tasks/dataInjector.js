@@ -11,10 +11,16 @@
       self = this;
       return self.files.forEach(function(array) {
         return array.src.forEach(function(file) {
-          var content, data, formattedData, returnType;
+          var content, data, e, formattedData, raw, returnType;
           if (grunt.file.exists(file) && grunt.file.exists(array.dest)) {
             grunt.log.ok("injecting " + file + " in " + array.dest);
-            data = options.reader(file);
+            raw = grunt.file.read(file);
+            try {
+              data = options.parser(raw);
+            } catch (_error) {
+              e = _error;
+              grunt.fail.warn("\n\nparsing failed\n" + e + "\n\n");
+            }
             if (options.path) {
               data = lib.extractor(data, options.path, options.keepStructure);
             }

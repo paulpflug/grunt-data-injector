@@ -68,7 +68,7 @@ would inject the data from the `.json` files into the corresponding `.js` files.
 ### Options
 Here the available options with the corresponding defaults:
 ```coffee
-# name of the reader - currently only `json` available
+# name of the reader - currently `json` or `yaml` available
 source: "json"
 
 # name of the formatter - currently only `js` available
@@ -100,6 +100,7 @@ If you build your own reader or formatter, I would be happy to include them!
 
 ## Release History
 
+ - *v0.0.2*: Added support for yaml
  - *v0.0.1*: First Release
 
 ## License

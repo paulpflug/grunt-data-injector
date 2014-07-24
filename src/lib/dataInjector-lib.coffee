@@ -1,5 +1,6 @@
 _ = require "lodash"
 util = require "util"
+YAML = require "js-yaml"
 extractor = (data,path,keepStructure) ->
   if path
     keys = path.split(".")
@@ -26,7 +27,10 @@ module.exports = (grunt) ->
       keepStructure: true
     json:
       options:
-        reader: grunt.file.readJSON
+        parser: JSON.parse
+    yaml:
+      options:
+        parser: YAML.load
     js:
       options:
         inserter: "{"

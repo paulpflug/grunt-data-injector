@@ -46,3 +46,16 @@ describe "Extractor", ->
   it "should work without keepStructure", ->
     result = lib.extractor(obj,"key1.key11",false)
     result.should.equal("value11")
+
+describe "Reader", ->
+  it "should work with json", ->
+    json = '{"key":"value"}'
+    options = lib.getOptions({source:"json"})
+    obj = options.parser(json)
+    obj["key"].should.equal("value")
+
+  it "should work with yaml", ->
+    json = '{"key":"value"}'
+    options = lib.getOptions({source:"yaml"})
+    obj = options.parser(json)
+    obj["key"].should.equal("value")

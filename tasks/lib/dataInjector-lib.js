@@ -1,9 +1,11 @@
 (function() {
-  var extractor, extractorHelper, util, _;
+  var YAML, extractor, extractorHelper, util, _;
 
   _ = require("lodash");
 
   util = require("util");
+
+  YAML = require("js-yaml");
 
   extractor = function(data, path, keepStructure) {
     var keys;
@@ -41,7 +43,12 @@
       },
       json: {
         options: {
-          reader: grunt.file.readJSON
+          parser: JSON.parse
+        }
+      },
+      yaml: {
+        options: {
+          parser: YAML.load
         }
       },
       js: {
